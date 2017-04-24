@@ -5,8 +5,8 @@ import (
 	"io"
 	"strings"
 
-	"github.com/mmcdole/gofeed/extensions"
-	"github.com/mmcdole/gofeed/internal/shared"
+	"github.com/NathanRThomas/gofeed/extensions"
+	"github.com/NathanRThomas/gofeed/internal/shared"
 	"github.com/mmcdole/goxpp"
 )
 
@@ -402,6 +402,12 @@ func (rp *Parser) parseItem(p *xpp.XMLPullParser) (item *Item, err error) {
 					return nil, err
 				}
 				categories = append(categories, result)
+            } else if name == "image" {
+                result, err := shared.ParseText(p)
+                if err != nil {
+                    return nil, err
+                }
+                item.Image = result
 			} else {
 				// Skip any elements not part of the item spec
 				p.Skip()

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/mmcdole/gofeed/extensions"
+	"github.com/NathanRThomas/gofeed/extensions"
 )
 
 // Feed is the universal Feed type that atom.Feed
@@ -51,7 +51,8 @@ type Item struct {
 	PublishedParsed *time.Time        `json:"publishedParsed,omitempty"`
 	Author          *Person           `json:"author,omitempty"`
 	GUID            string            `json:"guid,omitempty"`
-	Image           *Image            `json:"image,omitempty"`
+	//Image           *Image            `json:"image,omitempty"`
+    Image           string            `json:"image,omitempty"`
 	Categories      []string          `json:"categories,omitempty"`
 	Enclosures      []*Enclosure      `json:"enclosures,omitempty"`
 	Extensions      ext.Extensions    `json:"extensions,omitempty"`

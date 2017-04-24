@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/mmcdole/gofeed/extensions"
+	"github.com/NathanRThomas/gofeed/extensions"
 )
 
 // Feed is an RSS Feed
@@ -58,6 +58,7 @@ type Item struct {
 	DublinCoreExt *ext.DublinCoreExtension `json:"dcExt,omitempty"`
 	ITunesExt     *ext.ITunesItemExtension `json:"itunesExt,omitempty"`
 	Extensions    ext.Extensions           `json:"extensions,omitempty"`
+    Image         string                   `json:"string,omitempty"`
 }
 
 // Image is an image that represents the feed

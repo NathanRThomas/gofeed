@@ -5,10 +5,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mmcdole/gofeed/atom"
-	"github.com/mmcdole/gofeed/extensions"
-	"github.com/mmcdole/gofeed/internal/shared"
-	"github.com/mmcdole/gofeed/rss"
+	"github.com/NathanRThomas/gofeed/atom"
+	"github.com/NathanRThomas/gofeed/extensions"
+	"github.com/NathanRThomas/gofeed/internal/shared"
+	"github.com/NathanRThomas/gofeed/rss"
 )
 
 // Translator converts a particular feed (atom.Feed or rss.Feed)
@@ -330,12 +330,18 @@ func (t *DefaultRSSTranslator) translateItemGUID(rssItem *rss.Item) (guid string
 	return
 }
 
+/*
 func (t *DefaultRSSTranslator) translateItemImage(rssItem *rss.Item) (image *Image) {
 	if rssItem.ITunesExt != nil && rssItem.ITunesExt.Image != "" {
 		image = &Image{}
 		image.URL = rssItem.ITunesExt.Image
 	}
 	return
+}
+*/
+
+func (t *DefaultRSSTranslator) translateItemImage(rssItem *rss.Item) (string) {
+    return rssItem.Image
 }
 
 func (t *DefaultRSSTranslator) translateItemCategories(rssItem *rss.Item) (categories []string) {
@@ -606,8 +612,12 @@ func (t *DefaultAtomTranslator) translateItemGUID(entry *atom.Entry) (guid strin
 	return entry.ID
 }
 
-func (t *DefaultAtomTranslator) translateItemImage(entry *atom.Entry) (image *Image) {
+/*func (t *DefaultAtomTranslator) translateItemImage(entry *atom.Entry) (image *Image) {
 	return nil
+}
+*/
+func (t *DefaultAtomTranslator) translateItemImage(entry *atom.Entry) (string) {
+    return ""
 }
 
 func (t *DefaultAtomTranslator) translateItemCategories(entry *atom.Entry) (categories []string) {

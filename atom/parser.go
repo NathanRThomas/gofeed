@@ -6,8 +6,8 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/mmcdole/gofeed/extensions"
-	"github.com/mmcdole/gofeed/internal/shared"
+	"github.com/NathanRThomas/gofeed/extensions"
+	"github.com/NathanRThomas/gofeed/internal/shared"
 	"github.com/mmcdole/goxpp"
 )
 
