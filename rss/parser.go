@@ -330,9 +330,17 @@ func (rp *Parser) parseItem(p *xpp.XMLPullParser) (item *Item, err error) {
 		if tok == xpp.StartTag {
 
 			name := strings.ToLower(p.Name)
-
-			if shared.IsExtension(p) {
-				ext, err := shared.ParseExtension(extensions, p)
+            
+            if name == "thumbnail" {
+                result, err := shared.ParseText(p)
+                if err != nil {
+                    return nil, err
+                }
+                if len(result) > 0 {
+                    item.Image = result
+                }
+			} else if shared.IsExtension(p) {
+                ext, err := shared.ParseExtension(extensions, p)
 				if err != nil {
 					return nil, err
 				}
@@ -407,8 +415,10 @@ func (rp *Parser) parseItem(p *xpp.XMLPullParser) (item *Item, err error) {
                 if err != nil {
                     return nil, err
                 }
-                item.Image = result
-			} else {
+                if len(result) > 0 {
+                    item.Image = result
+                }
+            } else {
 				// Skip any elements not part of the item spec
 				p.Skip()
 			}
