@@ -364,7 +364,8 @@ func (rp *Parser) parseItem(p *xpp.XMLPullParser) (item *Item, err error) {
 				}
 				item.Link = result
 			} else if name == "author" {
-				result, err := shared.ParseText(p)
+				//result, err := shared.ParseText(p)
+                result, err := rp.parseAuthor(p)
 				if err != nil {
 					return nil, err
 				}
@@ -601,6 +602,45 @@ func (rp *Parser) parseCategory(p *xpp.XMLPullParser) (cat *Category, err error)
 		return nil, err
 	}
 	return cat, nil
+}
+
+func (rp *Parser) parseAuthor(p *xpp.XMLPullParser) (string, error) {
+    author := ""
+
+    if err := p.Expect(xpp.StartTag, "author"); err != nil {
+        return author, err
+    }
+
+    for {
+        tok, err := shared.NextTag(p)
+        if err != nil {
+            return author, err
+        }
+
+        if tok == xpp.EndTag {
+            break
+        }
+
+        if tok == xpp.StartTag {
+            name := strings.ToLower(p.Name)
+
+            if name == "name" {
+                result, err := shared.ParseText(p)
+                if err != nil {
+                    return author, err
+                }
+                author = result
+            } else {
+                p.Skip()
+            }
+        }
+    }
+
+    if err := p.Expect(xpp.EndTag, "author"); err != nil {
+        return author, err
+    }
+
+    return author, nil
 }
 
 func (rp *Parser) parseTextInput(p *xpp.XMLPullParser) (*TextInput, error) {
